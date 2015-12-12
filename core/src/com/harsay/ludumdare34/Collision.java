@@ -2,6 +2,7 @@ package com.harsay.ludumdare34;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.harsay.ludumdare34.entities.Entity;
 
@@ -38,8 +39,28 @@ public class Collision {
 			ent1.y += toMove;
 			ent2.y -= toMove;	
 		}
+	}
+	
+	public static void response(Entity ent, int tileX, int tileY) {
+		float tileRealX = tileX*Tiles.SIZE;
+		float tileRealY = tileY*Tiles.SIZE;
 		
+		boolean goesRight = ent.velX > 0;
+		boolean goesLeft = ent.velX < 0;
+		boolean goesDown = ent.velY < 0;
+		boolean goesUp = ent.velY > 0;	
+		
+		Rectangle tileRect = new Rectangle(tileRealX, tileRealY, Tiles.SIZE, Tiles.SIZE);
+		
+		boolean collidesLeft = tileRect.contains(ent.collisionPoints[Entity.COL_LEFT]);
+		boolean collidesUp = tileRect.contains(ent.collisionPoints[Entity.COL_UP]);
+		boolean collidesRight = tileRect.contains(ent.collisionPoints[Entity.COL_RIGHT]);
+		boolean collidesDown = tileRect.contains(ent.collisionPoints[Entity.COL_DOWN]);
 
+		if(collidesDown) ent.y = tileRealY + Tiles.SIZE;
+		else if(collidesUp) ent.y = tileRealY - ent.height;
+		if(collidesLeft) ent.x = tileRealX + Tiles.SIZE;
+		else if(collidesRight) ent.x = tileRealX - ent.width;;
 		
 		
 	}
