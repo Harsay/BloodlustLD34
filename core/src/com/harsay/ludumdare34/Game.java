@@ -1,6 +1,6 @@
 package com.harsay.ludumdare34;
 
-import com.harsay.ludumdare34.screens.GameScreen;
+import com.harsay.ludumdare34.screens.PlayScreen;
 
 
 public class Game extends com.badlogic.gdx.Game {
@@ -10,7 +10,7 @@ public class Game extends com.badlogic.gdx.Game {
 		Sfx.load();
 		Gfx.load();
 		
-		setScreen(new GameScreen());
+		setScreen(new PlayScreen());
 	}
 
 }
