@@ -7,13 +7,13 @@ import com.harsay.ludumdare34.Gfx;
 public class Player extends Entity {
 
 	public Player(float x, float y) {
-		super(x, y, 50, 100, Gfx.playerTest);
+		super(x, y, 64, 64, Gfx.playerTest2);
 	}
 	
 	public void update(float delta) {
 		super.update(delta);
 		
-		float move = 300*delta;
+		float move = 1000*delta;
 		
 		boolean up = Gdx.input.isKeyPressed(Keys.UP);
 		boolean down = Gdx.input.isKeyPressed(Keys.DOWN);

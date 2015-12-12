@@ -19,11 +19,10 @@ public class GameScreen implements Screen {
 	public SpriteBatch sb = new SpriteBatch();
 	public ShapeRenderer sr = new ShapeRenderer();
 	public Color clearColor = new Color(Color.BLACK);
-	public Color backgroundColor = new Color(Color.ORANGE);
+	public Color backgroundColor = new Color(Color.BLACK);
 		
 	public GameScreen() {
 		cam = new OrthographicCamera(Settings.NATIVE_WIDTH, Settings.NATIVE_HEIGHT);
-		cam.position.set(Settings.NATIVE_WIDTH/2, Settings.NATIVE_HEIGHT/2, 0);
 		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
 	}
 
@@ -41,6 +40,9 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		
+		sr.setProjectionMatrix(cam.combined);
+		sb.setProjectionMatrix(cam.combined);
+
 		// Background color
 		sr.begin(ShapeType.Filled);
 		sr.setColor(backgroundColor);

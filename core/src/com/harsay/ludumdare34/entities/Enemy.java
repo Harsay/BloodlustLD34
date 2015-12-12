@@ -1,17 +1,34 @@
 package com.harsay.ludumdare34.entities;
 
+import java.util.Random;
+
 import com.harsay.ludumdare34.Gfx;
 
 public class Enemy extends Entity {
+	
+	Random rand = new Random();
+	
+	float time = 0f;
+	float velX = 0;
+	float velY = 0;
 
 	public Enemy(float x, float y) {
-		super(x, y, 50, 100, Gfx.playerTest);
+		super(x, y, 64, 64, Gfx.playerTest);
 	}
 	
 	public void update(float delta) {
 		super.update(delta);
 		
-		x += 50*delta;
+		if(time <= 0) {
+			time = rand.nextFloat()*10f;
+			velX = rand.nextInt(200)-100;
+			velY = rand.nextInt(200)-100;
+		}
+		
+		time -= delta;
+		
+		x += velX*delta;
+		y += velY*delta;
 		
 		
 	}
