@@ -13,7 +13,7 @@ public class Enemy extends Entity {
 	float velY = 0;
 
 	public Enemy(float x, float y) {
-		super(x, y, 64, 64, Gfx.playerTest);
+		super(x, y, 16, 16, Gfx.playerIdle2);
 	}
 	
 	public void update(float delta) {

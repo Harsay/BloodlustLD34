@@ -1,0 +1,90 @@
+
+game.png
+size: 256,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hitdone
+  rotate: false
+  xy: 2, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+hitprepare
+  rotate: false
+  xy: 134, 104
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+idle1
+  rotate: false
+  xy: 2, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+idle2
+  rotate: false
+  xy: 20, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+playerTest
+  rotate: false
+  xy: 2, 56
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+playerTest2
+  rotate: false
+  xy: 68, 56
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+run1
+  rotate: false
+  xy: 134, 86
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+run2
+  rotate: false
+  xy: 152, 104
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+run3
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+tileFloor
+  rotate: false
+  xy: 20, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+tileWallBack
+  rotate: false
+  xy: 38, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+tileWallFront
+  rotate: false
+  xy: 134, 68
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1

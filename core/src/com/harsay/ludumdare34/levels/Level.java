@@ -3,21 +3,26 @@ package com.harsay.ludumdare34.levels;
 import java.util.Comparator;
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Sort;
 import com.harsay.ludumdare34.Collision;
+import com.harsay.ludumdare34.EntityShadow;
 import com.harsay.ludumdare34.Gfx;
 import com.harsay.ludumdare34.Tiles;
 import com.harsay.ludumdare34.entities.Enemy;
 import com.harsay.ludumdare34.entities.Entity;
 import com.harsay.ludumdare34.entities.Player;
+import com.harsay.ludumdare34.screens.GameScreen;
 
 public class Level {
 	
@@ -33,14 +38,17 @@ public class Level {
 	
 	public Player player;
 	
+	GameScreen scr;
 	
-	public Level() {
+	public Level(GameScreen scr) {
+		
+		this.scr =scr;
 		
 		player = new Player(0,0);
 		
 		entities.add(player);
 		
-		for(int i=0; i<400; i++) entities.add(new Enemy(rand.nextInt(60*64), rand.nextInt(60*64)));
+		for(int i=0; i<400; i++) entities.add(new Enemy(rand.nextInt(60*16), rand.nextInt(60*16)));
 		
 		map.addAll(
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -134,10 +142,21 @@ public class Level {
 			else if(ent.y+ent.height > getHeight()) ent.y = getHeight() - ent.height;
 			
 			// player attack collision
-			if(player.attacks) {
+			if(player.kills) {
 				if(ent.getClass().getSimpleName().equals("Enemy")) {
 					if(player.attackBounds.overlaps(new Rectangle(ent.x, ent.y, ent.width, ent.height))) {
 						entities.removeIndex(i);
+						
+						scr.shakeTime = 0.3f;
+						
+						// Guys from Vlambeer said that it works. idk
+						try {
+							Thread.sleep(10);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 					}
 				}
 			}
@@ -172,8 +191,9 @@ public class Level {
 		
 	}
 	
-	public void render(SpriteBatch sb) {
-		Texture toDraw = Gfx.floor;
+	public void render(SpriteBatch sb, ShapeRenderer sr) {
+		sb.begin();
+		TextureRegion toDraw = Gfx.floor;
 		for(int i=0; i<map.size; i++) {
 			int val = map.get(i);
 			
@@ -184,11 +204,23 @@ public class Level {
 			}
 			sb.draw(toDraw, (i%tilesWidth)*Tiles.SIZE, (tilesHeight * Tiles.SIZE) - Tiles.SIZE - ((int)Math.ceil(i/tilesWidth)*Tiles.SIZE));
 		}
+		sb.end();
 		
+		Gdx.gl.glEnable(GL20.GL_BLEND);
+	    Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		sr.begin(ShapeType.Filled);
+		for(int i=0; i<entities.size; i++) {
+			EntityShadow.draw(entities.get(i), sr);
+		}
+		sr.end();
+	    Gdx.gl.glDisable(GL20.GL_BLEND);
+		
+		sb.begin();
 		for(int i=0; i<entities.size; i++) {
 			entities.get(i).render(sb);
 		}
-		
+		sb.end();
+
 	}
 	
 	public void check() {

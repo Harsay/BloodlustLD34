@@ -20,10 +20,13 @@ public class GameScreen implements Screen {
 	public ShapeRenderer sr = new ShapeRenderer();
 	public Color clearColor = new Color(Color.BLACK);
 	public Color backgroundColor = new Color(Color.BLACK);
+	
+	public float shakeTime = 0, shakeStrength = 50.f;
+
 		
 	public GameScreen() {
 		cam = new OrthographicCamera(Settings.NATIVE_WIDTH, Settings.NATIVE_HEIGHT);
-		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
+		viewport = new FitViewport(Settings.NATIVE_WIDTH, Settings.NATIVE_HEIGHT, cam);
 	}
 
 	

@@ -2,6 +2,9 @@ package com.harsay.ludumdare34.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.harsay.ludumdare34.Gfx;
@@ -9,17 +12,27 @@ import com.harsay.ludumdare34.Gfx;
 public class Player extends Entity {
 		
 	public Rectangle attackBounds;
-	public boolean attacks = false;
+	public boolean attacks = false, kills = false;
+	
+	public Animation idle, run;
+	
+	public float animTime = 0.0f;
+	
+	public int animFace = RIGHT, tickWait = 0;
 
 	public Player(float x, float y) {
-		super(x, y, 64, 64, Gfx.playerTest2);
+		super(x, y, 16, 16, Gfx.playerIdle1);
 		attackBounds = new Rectangle(x+width, y, width, height);
+		
+		idle = new Animation(0.8f, Gfx.playerIdle1, Gfx.playerIdle2);
+		run = new Animation(0.1f, Gfx.playerRun1, Gfx.playerRun2, Gfx.playerRun3);
+		run.setPlayMode(PlayMode.LOOP_PINGPONG);
 	}
 	
 	public void update(float delta) {
 		super.update(delta);
 		
-		float move = 1000*delta;
+		float move = 100*delta;
 		
 		boolean up = Gdx.input.isKeyPressed(Keys.UP);
 		boolean down = Gdx.input.isKeyPressed(Keys.DOWN);
@@ -31,6 +44,8 @@ public class Player extends Entity {
 		
 		velX = 0;
 		velY = 0;
+		kills = false;
+		if(tickWait > 0) tickWait--;
 		
 		if(up) {
 			faces = UP;
@@ -43,28 +58,53 @@ public class Player extends Entity {
 		
 		if(right) {
 			faces = RIGHT;
+			animFace = RIGHT;
 			velX += move;
 		}
 		else if(left) {
 			faces = LEFT;
+			animFace = LEFT;
 			velX -= move;
 		}
 		
-		attacks = false;
-		if(space) {
+		if(space && !attacks) {
 			attacks = true;
-			switch(faces) {
-				case UP: attackBounds.setPosition(x, y+height); break;
-				case DOWN: attackBounds.setPosition(x, y-attackBounds.height); break;
-				case LEFT: attackBounds.setPosition(x-attackBounds.width, y); break;
-				case RIGHT: attackBounds.setPosition(x+width, y); break;
-			}
+			tickWait = 15;
 		}
+		
+		switch(faces) {
+		case UP: attackBounds.setPosition(x, y+height); break;
+		case DOWN: attackBounds.setPosition(x, y-attackBounds.height); break;
+		case LEFT: attackBounds.setPosition(x-attackBounds.width, y); break;
+		case RIGHT: attackBounds.setPosition(x+width, y); break;
+	}
 		
 		
 		x += velX;
 		y += velY;
 		
+		animTime += delta;
+		if(attacks) {
+			currentTexture = Gfx.playerPrepare;
+			if(tickWait == 0) {
+				currentTexture = Gfx.playerAttacked;
+				kills = true;
+				attacks = false;
+				tickWait = 5;
+			}
+		}
+		else if(tickWait == 0) {
+			if(velX == 0 && velY == 0) currentTexture = idle.getKeyFrame(animTime, true);
+			else currentTexture = run.getKeyFrame(animTime, true);
+		}
+
+	}
+	
+	public void render(SpriteBatch sb) {
+		// i kno
+		collisionCircle.set(x + width/2, y + height/2, width/4);
+		//
+		sb.draw(currentTexture, animFace == LEFT ? x+width : x, y, animFace == LEFT ? -width : width, height);
 	}
 	
 	public void debugRender(ShapeRenderer sr) {
