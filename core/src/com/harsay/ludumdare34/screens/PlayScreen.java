@@ -2,8 +2,7 @@ package com.harsay.ludumdare34.screens;
 
 import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector3;
 import com.harsay.ludumdare34.levels.Level;
@@ -14,20 +13,24 @@ public class PlayScreen extends GameScreen {
 		
 	Random rand = new Random();
 	
-	public PlayScreen() {
-		super();
-		level = new Level(this);
+	public PlayScreen(Game game) {
+		super(game);
+		level = new Level(this, game);
 	}
 	
 	public void update(float delta) {
 		super.update(delta);
 		level.update(delta);
-		
+		if(level.player.fury < 0) {
+			level.player.freeze = true;
+			game.setScreen(new EndScreen(game, level.player, cam));
+		}
+
 		
 
 			cam.position.lerp(new Vector3(level.player.getCenterX(), level.player.getCenterY(), 0), 10.0f*delta);
 
-			if(Gdx.input.isKeyJustPressed(Keys.P)) shakeTime = 3.0f;
+			//if(Gdx.input.isKeyJustPressed(Keys.P)) shakeTime = 3.0f;
 			cameraShake(delta);
 
 			float camMinX = cam.viewportWidth/2;
@@ -39,9 +42,6 @@ public class PlayScreen extends GameScreen {
 			else if(cam.position.x > camMaxX) cam.position.x = camMaxX;
 			if(cam.position.y < camMinY) cam.position.y = camMinY;
 			else if(cam.position.y > camMaxY) cam.position.y = camMaxY;
-			
-
-		
 	
 	}
 	

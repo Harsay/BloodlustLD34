@@ -9,9 +9,7 @@ import com.harsay.ludumdare34.entities.Entity;
 public class Collision {
 	
 	public static void response(Entity ent1, Entity ent2) {
-		
-		//TODO: Przewidywanie zamiast wyci¹gania
-		
+				
 		Circle c1 = ent1.collisionCircle;
 		Circle c2 = ent2.collisionCircle;
 		Vector2 c1v = new Vector2(c1.x, c1.y);

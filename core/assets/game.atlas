@@ -151,44 +151,51 @@ idle2
   orig: 16, 16
   offset: 0, 0
   index: -1
-run1
+playerfail
   rotate: false
   xy: 362, 5
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-run2
+run1
   rotate: false
   xy: 380, 5
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-run3
+run2
   rotate: false
   xy: 398, 5
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-tileFloor
+run3
   rotate: false
   xy: 416, 5
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-tileWallBack
+tileFloor
   rotate: false
   xy: 434, 5
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-tileWallFront
+tileWallBack
   rotate: false
   xy: 452, 5
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+tileWallFront
+  rotate: false
+  xy: 470, 5
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

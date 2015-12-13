@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.utils.Array;
 
 public class Gfx {
@@ -11,7 +13,7 @@ public class Gfx {
 	public static BitmapFont font;
 	public static TextureAtlas atlas;
 	public static TextureRegion 
-	floor, ceiling, wall, blood,
+	floor, ceiling, wall, blood, playerFail,
 	enemyHalf1, enemyHalf2, 
 	enemyHalfUp, enemyHalfDown,
 	enemyHead, enemyNoHead;
@@ -22,10 +24,10 @@ public class Gfx {
 		// FUCK THIS
 		// JUST REMEMBER
 		// FONT HAS TOP LEFT CORNER COORDINATES!!!
-		//FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("opensans.ttf"));
-		//FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		//parameter.size = 48;
-		//font = generator.generateFont(parameter);
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Minecraft.ttf"));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 16;
+		font = generator.generateFont(parameter);
 		
 		atlas = new TextureAtlas(Gdx.files.internal("game.atlas"));
 		
@@ -65,6 +67,7 @@ public class Gfx {
 		enemyHead = atlas.findRegion("enemyHead");
 		enemyNoHead = atlas.findRegion("enemyNoHead");
 		blood = atlas.findRegion("blood");
+		playerFail = atlas.findRegion("playerfail");
 
 	}
 	

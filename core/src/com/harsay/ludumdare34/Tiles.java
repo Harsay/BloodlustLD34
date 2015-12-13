@@ -7,7 +7,10 @@ public class Tiles {
 	public static final int 
 	CEILING = 0,
 	FLOOR = 1,
-	WALL = 2;
+	WALL = 2,
+	ENEMY = 7,
+	PLAYER = 8,
+	FINISH = 9;
 	
 
 }

@@ -1,5 +1,6 @@
 package com.harsay.ludumdare34.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -22,11 +23,15 @@ public class GameScreen implements Screen {
 	public Color backgroundColor = new Color(Color.BLACK);
 	
 	public float shakeTime = 0, shakeStrength = 25.f;
+	
+	Game game;
 
 		
-	public GameScreen() {
+	public GameScreen(Game game) {
+		this.game = game;
 		cam = new OrthographicCamera(Settings.NATIVE_WIDTH, Settings.NATIVE_HEIGHT);
 		viewport = new FitViewport(Settings.NATIVE_WIDTH, Settings.NATIVE_HEIGHT, cam);
+		cam.position.set(Settings.NATIVE_WIDTH/2, Settings.NATIVE_HEIGHT/2, 0);
 	}
 
 	

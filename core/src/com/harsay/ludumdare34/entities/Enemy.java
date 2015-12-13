@@ -17,10 +17,13 @@ public class Enemy extends Entity {
 	float velX = 0;
 	float velY = 0;
 	
+	public boolean freeze = false;
+	
 	public int animFace = RIGHT;
 
-	public Enemy(float x, float y) {
+	public Enemy(float x, float y, boolean freeze) {
 		super(x, y, 16, 16, Gfx.frames.get(7));
+		this.freeze = freeze;
 		walk = new Animation(0.2f, Gfx.frames.get(7), Gfx.frames.get(8), Gfx.frames.get(9), Gfx.frames.get(10));
 		run = new Animation(0.1f, Gfx.frames.get(11), Gfx.frames.get(12), Gfx.frames.get(13));
 		runHead = new Animation(0.1f, Gfx.frames.get(14), Gfx.frames.get(15), Gfx.frames.get(16));
@@ -37,8 +40,10 @@ public class Enemy extends Entity {
 		
 		time -= delta;
 		
-		x += velX*delta;
-		y += velY*delta;
+		if(!freeze) {
+			x += velX*delta;
+			y += velY*delta;
+		}
 		
 		if(velX < 0) animFace = LEFT;
 		else animFace = RIGHT;
@@ -47,9 +52,10 @@ public class Enemy extends Entity {
 		if(Math.abs(velX + velY) >= 500) curAnim = runHead;
 		else if(Math.abs(velX + velY) >= 100) curAnim = run;
 		else curAnim = walk;
-		
+				
 		animTime += delta;
 		currentTexture = curAnim.getKeyFrame(animTime, true);
+		if(freeze) currentTexture = Gfx.frames.get(7);
 	}
 	
 	public void render(SpriteBatch sb) {

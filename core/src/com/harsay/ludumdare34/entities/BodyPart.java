@@ -30,6 +30,8 @@ public class BodyPart extends Entity {
 		
 		sprite = new Sprite(currentTexture);
 		
+		y -= 10;
+		
 		this.n = n;
 		
 		float spd = rand.nextFloat()*200;
@@ -86,6 +88,7 @@ public class BodyPart extends Entity {
 					}
 					else {
 						velX = 0;
+						velY = 0;
 					}
 		
 					goesDown = false;
@@ -103,7 +106,6 @@ public class BodyPart extends Entity {
 		collisionCircle.set(x + width/2, y + height/2, width/4);
 		//
 		sprite.draw(sb);
-		
 	}
 
 }
