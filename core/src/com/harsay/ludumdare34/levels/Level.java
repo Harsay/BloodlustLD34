@@ -4,19 +4,18 @@ import java.util.Comparator;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Sort;
+import com.harsay.ludumdare34.Blood;
 import com.harsay.ludumdare34.Collision;
-import com.harsay.ludumdare34.EntityShadow;
 import com.harsay.ludumdare34.Gfx;
 import com.harsay.ludumdare34.Tiles;
 import com.harsay.ludumdare34.entities.BodyPart;
@@ -51,7 +50,7 @@ public class Level {
 		
 		//for(int i=0; i<400; i++) entities.add(new Enemy(rand.nextInt(60*16), rand.nextInt(60*16)));
 		
-		for(int i=0; i<10; i++ ) entities.add(new Enemy(200 + 32*i, 200));
+		//for(int i=0; i<10; i++ ) entities.add(new Enemy(200 + 32*i, 200));
 		
 		map.addAll(
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -121,6 +120,10 @@ public class Level {
 	}
 	
 	public void update(float delta) {
+		
+		if(Gdx.input.isKeyJustPressed(Keys.K)) {
+			entities.add(new Enemy(player.getCenterX(), player.getCenterY()));
+		}
 				
 		s.sort(entities, new Comparator<Entity>() {
 			@Override
@@ -131,11 +134,11 @@ public class Level {
 			}
 		});
 		
-		// Level bounds collision
+		// Level bounds collision and updates and stuff
 		for(int i=0; i<entities.size; i++) {
 			Entity ent = entities.get(i);
 			
-			// update very entity
+			// update every entity
 			ent.update(delta);
 			
 			// level bounds
@@ -148,11 +151,10 @@ public class Level {
 			if(player.kills) {
 				if(ent.getClass().getSimpleName().equals("Enemy")) {
 					if(player.attackBounds.overlaps(new Rectangle(ent.x, ent.y, ent.width, ent.height))) {						
-						
 						switch(rand.nextInt(3)) {
-						case 0: entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHalf1)); entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHalf2)); break;
-						case 1: entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHalfDown)); entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHalfUp)); break;
-						case 2: entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHead)); entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyNoHead)); break;
+						case 0: entities.add(new BodyPart(ent.x, ent.y, player.faces, 1, Gfx.enemyHalf1)); entities.add(new BodyPart(ent.x, ent.y, player.faces, -1, Gfx.enemyHalf2)); break;
+						case 1: entities.add(new BodyPart(ent.x, ent.y, player.faces, -1, Gfx.enemyHalfDown)); entities.add(new BodyPart(ent.x, ent.y, player.faces, 1, Gfx.enemyHalfUp)); break;
+						case 2: entities.add(new BodyPart(ent.x, ent.y, player.faces, -1, Gfx.enemyHead)); entities.add(new BodyPart(ent.x, ent.y, player.faces, 1, Gfx.enemyNoHead)); break;
 						}
 						
 						entities.removeIndex(i);
@@ -216,16 +218,24 @@ public class Level {
 		}
 		sb.end();
 		
-		Gdx.gl.glEnable(GL20.GL_BLEND);
+		/*Gdx.gl.glEnable(GL20.GL_BLEND);
 	    Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		sr.begin(ShapeType.Filled);
 		for(int i=0; i<entities.size; i++) {
-			EntityShadow.draw(entities.get(i), sr);
+			//EntityShadow.draw(entities.get(i), sr);
 		}
 		sr.end();
-	    Gdx.gl.glDisable(GL20.GL_BLEND);
+	    Gdx.gl.glDisable(GL20.GL_BLEND);*/
 		
 		sb.begin();
+		for(int i=0; i<entities.size; i++) {
+			Entity ent = entities.get(i);
+			for(int j=0; j<ent.bloods.size; j++) {
+				Blood b = ent.bloods.get(j);
+				sb.draw(Gfx.blood, b.x, b.y);
+			}
+		}
+		
 		for(int i=0; i<entities.size; i++) {
 			entities.get(i).render(sb);
 		}

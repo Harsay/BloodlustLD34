@@ -11,7 +11,7 @@ public class Gfx {
 	public static BitmapFont font;
 	public static TextureAtlas atlas;
 	public static TextureRegion 
-	floor, ceiling, wall,
+	floor, ceiling, wall, blood,
 	enemyHalf1, enemyHalf2, 
 	enemyHalfUp, enemyHalfDown,
 	enemyHead, enemyNoHead;
@@ -64,6 +64,7 @@ public class Gfx {
 		enemyHalfDown = atlas.findRegion("enemyHalfDown");
 		enemyHead = atlas.findRegion("enemyHead");
 		enemyNoHead = atlas.findRegion("enemyNoHead");
+		blood = atlas.findRegion("blood");
 
 	}
 	

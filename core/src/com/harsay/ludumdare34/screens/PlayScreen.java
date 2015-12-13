@@ -28,7 +28,8 @@ public class PlayScreen extends GameScreen {
 			cam.position.lerp(new Vector3(level.player.getCenterX(), level.player.getCenterY(), 0), 10.0f*delta);
 
 			if(Gdx.input.isKeyJustPressed(Keys.P)) shakeTime = 3.0f;
-			
+			cameraShake(delta);
+
 			float camMinX = cam.viewportWidth/2;
 			float camMaxX = level.getWidth() - camMinX;
 			float camMinY = cam.viewportHeight/2;
@@ -39,7 +40,6 @@ public class PlayScreen extends GameScreen {
 			if(cam.position.y < camMinY) cam.position.y = camMinY;
 			else if(cam.position.y > camMaxY) cam.position.y = camMaxY;
 			
-			cameraShake(delta);
 
 		
 	

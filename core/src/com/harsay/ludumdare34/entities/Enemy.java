@@ -37,8 +37,8 @@ public class Enemy extends Entity {
 		
 		time -= delta;
 		
-		//x += velX*delta;
-		//y += velY*delta;
+		x += velX*delta;
+		y += velY*delta;
 		
 		if(velX < 0) animFace = LEFT;
 		else animFace = RIGHT;

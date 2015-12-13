@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import com.harsay.ludumdare34.Blood;
 import com.harsay.ludumdare34.Tiles;
 import com.harsay.ludumdare34.levels.Level;
 
@@ -19,6 +21,9 @@ public class Entity {
 	public TextureRegion currentTexture;
 	
 	public Vector2[] collisionPoints = new Vector2[4];
+	
+	public Array<Blood> bloods = new Array<Blood>();
+
 	
 	public static final int 
 	COL_LEFT = 0,
