@@ -13,7 +13,7 @@ import com.harsay.ludumdare34.levels.Level;
 
 public class Entity {
 
-	public float velX = 0, velY = 0, x, y, width, height;
+	public float velX = 0, velY = 0, x, y, z = 0, width, height;
 	public Circle collisionCircle;
 	
 	public TextureRegion currentTexture;
@@ -63,7 +63,7 @@ public class Entity {
 		collisionCircle.set(x + width/2, y + height/2, width/4);
 		//
 		
-		sb.draw(currentTexture, x, y);
+		sb.draw(currentTexture, x, y+z);
 	}
 	
 	public void debugRender(ShapeRenderer sr) {

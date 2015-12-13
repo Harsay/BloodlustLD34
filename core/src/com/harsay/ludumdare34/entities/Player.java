@@ -21,11 +21,11 @@ public class Player extends Entity {
 	public int animFace = RIGHT, tickWait = 0;
 
 	public Player(float x, float y) {
-		super(x, y, 16, 16, Gfx.playerIdle1);
+		super(x, y, 16, 16, Gfx.frames.get(0));
 		attackBounds = new Rectangle(x+width, y, width, height);
 		
-		idle = new Animation(0.8f, Gfx.playerIdle1, Gfx.playerIdle2);
-		run = new Animation(0.1f, Gfx.playerRun1, Gfx.playerRun2, Gfx.playerRun3);
+		idle = new Animation(0.8f, Gfx.frames.get(0), Gfx.frames.get(1));
+		run = new Animation(0.1f, Gfx.frames.get(2), Gfx.frames.get(3), Gfx.frames.get(4));
 		run.setPlayMode(PlayMode.LOOP_PINGPONG);
 	}
 	
@@ -85,9 +85,9 @@ public class Player extends Entity {
 		
 		animTime += delta;
 		if(attacks) {
-			currentTexture = Gfx.playerPrepare;
+			currentTexture = Gfx.frames.get(5);
 			if(tickWait == 0) {
-				currentTexture = Gfx.playerAttacked;
+				currentTexture = Gfx.frames.get(6);
 				kills = true;
 				attacks = false;
 				tickWait = 5;

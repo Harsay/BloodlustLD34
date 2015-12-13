@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
 	public Color clearColor = new Color(Color.BLACK);
 	public Color backgroundColor = new Color(Color.BLACK);
 	
-	public float shakeTime = 0, shakeStrength = 50.f;
+	public float shakeTime = 0, shakeStrength = 25.f;
 
 		
 	public GameScreen() {

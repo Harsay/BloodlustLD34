@@ -13,7 +13,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = Settings.NATIVE_WIDTH*4;
 		config.height = Settings.NATIVE_HEIGHT*4;
-		config.title = "LudumDare 34";
+		config.title = "Bloodlust: Castle Of Cowards (Ludum Dare 34)";
         TexturePacker.process("../core/assets", "../core/assets", "game");
 
 		new LwjglApplication(new Game(), config);

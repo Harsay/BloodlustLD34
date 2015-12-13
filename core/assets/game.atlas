@@ -1,89 +1,187 @@
 
 game.png
-size: 256,128
+size: 512,32
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-hitdone
-  rotate: false
-  xy: 2, 38
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-hitprepare
-  rotate: false
-  xy: 134, 104
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-idle1
-  rotate: false
-  xy: 2, 20
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-idle2
-  rotate: false
-  xy: 20, 38
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-playerTest
-  rotate: false
-  xy: 2, 56
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-playerTest2
-  rotate: false
-  xy: 68, 56
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-run1
-  rotate: false
-  xy: 134, 86
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-run2
-  rotate: false
-  xy: 152, 104
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-run3
+enemyHalf1
   rotate: false
   xy: 2, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
+enemyHalf2
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyHalfDown
+  rotate: false
+  xy: 38, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyHalfUp
+  rotate: false
+  xy: 56, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyHead
+  rotate: false
+  xy: 74, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyNoHead
+  rotate: false
+  xy: 92, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyrun1
+  rotate: false
+  xy: 110, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyrun2
+  rotate: false
+  xy: 128, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyrun3
+  rotate: false
+  xy: 146, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyrunhead1
+  rotate: false
+  xy: 164, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyrunhead2
+  rotate: false
+  xy: 182, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemyrunhead3
+  rotate: false
+  xy: 200, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemywalk1
+  rotate: false
+  xy: 218, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemywalk2
+  rotate: false
+  xy: 236, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemywalk3
+  rotate: false
+  xy: 254, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+enemywalk4
+  rotate: false
+  xy: 272, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+hitdone
+  rotate: false
+  xy: 290, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+hitprepare
+  rotate: false
+  xy: 308, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+idle1
+  rotate: false
+  xy: 326, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+idle2
+  rotate: false
+  xy: 344, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+run1
+  rotate: false
+  xy: 362, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+run2
+  rotate: false
+  xy: 380, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+run3
+  rotate: false
+  xy: 398, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 tileFloor
   rotate: false
-  xy: 20, 20
+  xy: 416, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 tileWallBack
   rotate: false
-  xy: 38, 38
+  xy: 434, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 tileWallFront
   rotate: false
-  xy: 134, 68
+  xy: 452, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

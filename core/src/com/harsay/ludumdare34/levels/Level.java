@@ -19,6 +19,7 @@ import com.harsay.ludumdare34.Collision;
 import com.harsay.ludumdare34.EntityShadow;
 import com.harsay.ludumdare34.Gfx;
 import com.harsay.ludumdare34.Tiles;
+import com.harsay.ludumdare34.entities.BodyPart;
 import com.harsay.ludumdare34.entities.Enemy;
 import com.harsay.ludumdare34.entities.Entity;
 import com.harsay.ludumdare34.entities.Player;
@@ -48,7 +49,9 @@ public class Level {
 		
 		entities.add(player);
 		
-		for(int i=0; i<400; i++) entities.add(new Enemy(rand.nextInt(60*16), rand.nextInt(60*16)));
+		//for(int i=0; i<400; i++) entities.add(new Enemy(rand.nextInt(60*16), rand.nextInt(60*16)));
+		
+		for(int i=0; i<10; i++ ) entities.add(new Enemy(200 + 32*i, 200));
 		
 		map.addAll(
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -144,9 +147,16 @@ public class Level {
 			// player attack collision
 			if(player.kills) {
 				if(ent.getClass().getSimpleName().equals("Enemy")) {
-					if(player.attackBounds.overlaps(new Rectangle(ent.x, ent.y, ent.width, ent.height))) {
-						entities.removeIndex(i);
+					if(player.attackBounds.overlaps(new Rectangle(ent.x, ent.y, ent.width, ent.height))) {						
 						
+						switch(rand.nextInt(3)) {
+						case 0: entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHalf1)); entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHalf2)); break;
+						case 1: entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHalfDown)); entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHalfUp)); break;
+						case 2: entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyHead)); entities.add(new BodyPart(ent.x, ent.y, Gfx.enemyNoHead)); break;
+						}
+						
+						entities.removeIndex(i);
+
 						scr.shakeTime = 0.3f;
 						
 						// Guys from Vlambeer said that it works. idk
