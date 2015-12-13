@@ -3,6 +3,8 @@ package com.harsay.ludumdare34.screens;
 import java.util.Random;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector3;
 import com.harsay.ludumdare34.levels.Level;
@@ -13,6 +15,8 @@ public class PlayScreen extends GameScreen {
 		
 	Random rand = new Random();
 	
+	public boolean debug = false;
+	
 	public PlayScreen(Game game) {
 		super(game);
 		level = new Level(this, game);
@@ -21,6 +25,9 @@ public class PlayScreen extends GameScreen {
 	public void update(float delta) {
 		super.update(delta);
 		level.update(delta);
+		if(Gdx.input.isKeyJustPressed(Keys.F9)) {
+			debug = !debug;
+		}
 		if(level.player.fury < 0) {
 			level.player.freeze = true;
 			game.setScreen(new EndScreen(game, level.player, cam));
@@ -50,7 +57,7 @@ public class PlayScreen extends GameScreen {
 		level.render(sb, sr);
 		
 		sr.begin(ShapeType.Line);
-		//level.debugRender(sr);
+		if(debug)level.debugRender(sr);
 		sr.end();
 		
 	}

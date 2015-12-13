@@ -28,19 +28,19 @@ import com.harsay.ludumdare34.screens.WelcomeScreen;
 
 public class Level {
 	
-	public int tilesWidth = 15;
-	public int tilesHeight = 15;
+	public int tilesWidth;
+	public int tilesHeight;
 	
 	public IntArray map = new IntArray();
 	public Array<Entity> entities = new Array<Entity>();
 	
-	int lvl = 0;
+	int lvl = -1;
 	
 	Random rand = new Random();
 	
 	Sort s = new Sort();
 	
-	public Player player;
+	public Player player = null;
 	
 	GameScreen scr;
 	
@@ -51,10 +51,21 @@ public class Level {
 		this.scr = scr;
 		this.game = game;
 		
-		map = Levels.welcomeLevel;
+		loadNextLevel();
 		
+	}
+	
+	public void loadNextLevel() {
+		lvl++;
+		
+		entities.clear();
+		
+		map = Levels.level[lvl];
+		tilesWidth = Levels.levelWidth[lvl];
+		tilesHeight = Levels.levelHeight[lvl];
 		check();
 		
+		scr.cam.position.set(player.getCenterX(), player.getCenterY(), 0);
 	}
 	
 	public void update(float delta) {
@@ -142,7 +153,7 @@ public class Level {
 		}
 		
 		if(getTile(player) == Tiles.FINISH) {
-			game.setScreen(new WelcomeScreen(game));
+			loadNextLevel();
 		}
 		
 	}
@@ -203,7 +214,11 @@ public class Level {
 			}
 			if(map.get(i) == Tiles.PLAYER) {
 				Vector2 v = getTilePosFromWidth(i);
-				player = new Player(v.x*Tiles.SIZE, v.y*Tiles.SIZE);
+				if(player == null) player = new Player(v.x*Tiles.SIZE, v.y*Tiles.SIZE);
+				else {
+					player.x = v.x*Tiles.SIZE;
+					player.y = v.y*Tiles.SIZE;
+				}
 				entities.add(player);
 			}
 			else if(map.get(i) == Tiles.ENEMY) {
@@ -215,7 +230,7 @@ public class Level {
 	
 	public Vector2 getTilePosFromWidth(int width) {
 		
-		int y = tilesHeight - (int) Math.floor(width/tilesHeight) - 1;
+		int y = tilesHeight - (int) Math.floor(width/tilesWidth) - 1;
 		int x = (width%tilesWidth);
 				
 		System.out.println(x + " | " + y);
@@ -240,15 +255,15 @@ public class Level {
 	
 	public Vector2 getTilePosition(Entity ent) {
 		return new Vector2((int)Math.floor(ent.getCenterX()/Tiles.SIZE), (int)Math.floor(ent.getCenterY()/Tiles.SIZE));
-		
 	}
 	
 	public int getTile(Entity ent) {
 		Vector2 v = getTilePosition(ent);
 		return getTile((int)v.x, (int)v.y);
 	}
+	
 	public int getTile(int x, int y) {
-		int p = (((tilesWidth-1 - y) * tilesWidth) + x);
+		int p = (((tilesHeight-1 - y) * tilesWidth) + x);
 		if(p < 0 || p >= tilesWidth*tilesHeight) return -1;
 		return map.get(p);
 	}

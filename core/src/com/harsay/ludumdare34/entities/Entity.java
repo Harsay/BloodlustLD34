@@ -87,6 +87,7 @@ public class Entity {
 	
 	public boolean collides(Level level, int tileX, int tileY) {
 		int t = level.getTile(tileX, tileY);
+		System.out.println(t);
 		if(t != 0) return false; // collides only with 0's
 		Rectangle tileRect = new Rectangle(tileX*Tiles.SIZE, tileY*Tiles.SIZE, Tiles.SIZE, Tiles.SIZE);
 		Rectangle entRect = new Rectangle(x, y, width, height);

@@ -20,7 +20,7 @@ public class Player extends Entity {
 	
 	public float animTime = 0.0f;
 	
-	public int fury = 50;
+	public int fury = 100;
 	
 	public float furyDecrementTime = 2.0f;
 	
@@ -42,10 +42,10 @@ public class Player extends Entity {
 		
 		float move = (baseSpeed + furyAddSpeed*(fury/100f))*delta;
 		
-		boolean up = Gdx.input.isKeyPressed(Keys.UP);
-		boolean down = Gdx.input.isKeyPressed(Keys.DOWN);
-		boolean left = Gdx.input.isKeyPressed(Keys.LEFT);
-		boolean right = Gdx.input.isKeyPressed(Keys.RIGHT);
+		boolean up = Gdx.input.isKeyPressed(Keys.UP) || Gdx.input.isKeyPressed(Keys.W);
+		boolean down = Gdx.input.isKeyPressed(Keys.DOWN) || Gdx.input.isKeyPressed(Keys.S);
+		boolean left = Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A);
+		boolean right = Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D);
 		boolean space = Gdx.input.isKeyJustPressed(Keys.SPACE);
 		
 		//TODO: strafe fix
@@ -55,7 +55,7 @@ public class Player extends Entity {
 		furyDecrementTime -= delta;
 		
 		if(furyDecrementTime <= 0)  {
-			fury -= 1;
+			 fury -= 1;
 			furyDecrementTime = 0.2f;
 		}
 		
@@ -115,7 +115,7 @@ public class Player extends Entity {
 			else currentTexture = run.getKeyFrame(animTime, true);
 		}
 		
-		System.out.println(fury);
+		//System.out.println(fury);
 
 	}
 	
