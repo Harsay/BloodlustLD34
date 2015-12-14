@@ -23,8 +23,9 @@ import com.harsay.ludumdare34.entities.BodyPart;
 import com.harsay.ludumdare34.entities.Enemy;
 import com.harsay.ludumdare34.entities.Entity;
 import com.harsay.ludumdare34.entities.Player;
+import com.harsay.ludumdare34.screens.EndScreen;
 import com.harsay.ludumdare34.screens.GameScreen;
-import com.harsay.ludumdare34.screens.WelcomeScreen;
+import com.harsay.ludumdare34.screens.WinScreen;
 
 public class Level {
 	
@@ -154,6 +155,13 @@ public class Level {
 		
 		if(getTile(player) == Tiles.FINISH) {
 			loadNextLevel();
+		}
+		
+		if(player.fury < 0) {
+			player.freeze = true;
+			
+			if(lvl != 5) game.setScreen(new EndScreen(game, player, scr.cam));
+			else game.setScreen(new WinScreen(game, player, scr.cam));
 		}
 		
 	}

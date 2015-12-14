@@ -28,10 +28,6 @@ public class PlayScreen extends GameScreen {
 		if(Gdx.input.isKeyJustPressed(Keys.F9)) {
 			debug = !debug;
 		}
-		if(level.player.fury < 0) {
-			level.player.freeze = true;
-			game.setScreen(new EndScreen(game, level.player, cam));
-		}
 
 		
 
