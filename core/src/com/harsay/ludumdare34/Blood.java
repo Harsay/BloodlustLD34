@@ -7,15 +7,15 @@ public class Blood {
 	public float x, y, velX, velY;
 	public TextureRegion txt;
 	
-	public int ticks = 3;
+	public float ticks = 0.05f;
 	
 	public Blood() {
 		txt = Gfx.blood;
 	}
 	
 	public void update(float delta) {
-		if(ticks == 0) return;
-		ticks--;
+		if(ticks <= 0) return;
+		ticks-=delta;
 		x += velX;
 		y += velY;
 	}

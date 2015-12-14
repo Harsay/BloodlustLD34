@@ -18,13 +18,13 @@ public class Player extends Entity {
 	
 	public Animation idle, run;
 	
-	public float animTime = 0.0f;
+	public float animTime = 0.0f, tickWait = 0.0f;
 	
 	public int fury = 100;
 	
 	public float furyDecrementTime = 2.0f;
 	
-	public int animFace = RIGHT, tickWait = 0;
+	public int animFace = RIGHT;
 
 	public Player(float x, float y) {
 		super(x, y, 16, 16, Gfx.frames.get(0));
@@ -61,7 +61,6 @@ public class Player extends Entity {
 		velX = 0;
 		velY = 0;
 		kills = false;
-		if(tickWait > 0) tickWait--;
 		
 		if(up) {
 			faces = UP;
@@ -82,10 +81,10 @@ public class Player extends Entity {
 			animFace = LEFT;
 			velX -= move;
 		}
-		
-		if(space && !attacks) {
+
+		if(space && !attacks && tickWait == 0) {
 			attacks = true;
-			tickWait = 15;
+			tickWait = 0.15f;
 		}
 		
 		switch(faces) {
@@ -98,24 +97,24 @@ public class Player extends Entity {
 		
 		x += velX;
 		y += velY;
-		
+
+		if(tickWait > 0) tickWait -= delta;
 		animTime += delta;
 		if(attacks) {
 			currentTexture = Gfx.frames.get(5);
-			if(tickWait == 0) {
+			if(tickWait <= 0) {
 				currentTexture = Gfx.frames.get(6);
 				kills = true;
 				attacks = false;
-				tickWait = 5;
+				tickWait = 0.1f;
 			}
 		}
-		else if(tickWait == 0) {
+		else if(tickWait <= 0) {
+			tickWait = 0;
 			if(velX == 0 && velY == 0) currentTexture = idle.getKeyFrame(animTime, true);
 			else currentTexture = run.getKeyFrame(animTime, true);
 		}
 		
-		System.out.println("Fury " + fury);
-
 	}
 	
 	public void render(SpriteBatch sb) {
@@ -137,7 +136,7 @@ public class Player extends Entity {
 	}
 	
 	public void addFury() {
-		fury += 4;
+		fury += 6;
 		//furyDecrementTime += 0.1f;
 		if(fury > 100) fury = 100;
 	}

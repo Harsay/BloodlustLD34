@@ -22,7 +22,7 @@ public class EndScreen extends GameScreen {
 		this.player = player;
 		clearColor = new Color(15/255f, 15/255f, 15/255f, 1);
 		backgroundColor = clearColor;
-		l = new GlyphLayout(Gfx.font, "FAILED!");
+		l = new GlyphLayout(Gfx.font, "FAILED! - KILL MORE OFTEN!\n  GROW YOUR BLOODLUST!");
 		k = new GlyphLayout(Gfx.font, "Press ENTER to start again.");
 	}
 	

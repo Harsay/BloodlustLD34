@@ -19,7 +19,7 @@ public class BodyPart extends Entity {
 	public float maxZ = 16, rotateSpeed;
 	public boolean goesUp = true, goesDown = false;
 		
-	public int maxBloods = 100;
+	public int maxBloods = 150;
 	
 	public int n;
 	

@@ -2,7 +2,6 @@ package com.harsay.ludumdare34.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.harsay.ludumdare34.Game;
 import com.harsay.ludumdare34.Settings;
 
