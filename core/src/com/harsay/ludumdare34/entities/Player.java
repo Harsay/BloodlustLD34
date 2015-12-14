@@ -47,16 +47,14 @@ public class Player extends Entity {
 		boolean left = Gdx.input.isKeyPressed(Keys.LEFT) || Gdx.input.isKeyPressed(Keys.A);
 		boolean right = Gdx.input.isKeyPressed(Keys.RIGHT) || Gdx.input.isKeyPressed(Keys.D);
 		boolean space = Gdx.input.isKeyJustPressed(Keys.SPACE);
-		
-		//TODO: strafe fix
-		
+				
 		idle.setFrameDuration(1.1f - (fury/100f));
 		
 		furyDecrementTime -= delta;
 		
 		if(furyDecrementTime <= 0)  {
-			fury -= 1;
-			furyDecrementTime = 0.2f;
+			fury -= 2;
+			furyDecrementTime = 0.3f;
 		}
 		
 		

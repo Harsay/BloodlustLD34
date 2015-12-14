@@ -32,11 +32,13 @@ public class Enemy extends Entity {
 	public void update(float delta) {
 		super.update(delta);
 		
-		if(time <= 0) {
+		if(time <= 0 || hadCollision) {
+			hadCollision = false;
 			time = rand.nextFloat()*10f;
-			velX = rand.nextInt(400)-200;
-			velY = rand.nextInt(400)-200;
-		}
+			velX = rand.nextInt(200)-100;
+			velY = rand.nextInt(200)-100;
+		} 
+
 		
 		time -= delta;
 		
@@ -49,8 +51,8 @@ public class Enemy extends Entity {
 		else animFace = RIGHT;
 		
 		Animation curAnim;
-		if(Math.abs(velX + velY) >= 500) curAnim = runHead;
-		else if(Math.abs(velX + velY) >= 100) curAnim = run;
+		if(Math.abs(velY) + Math.abs(velX) >= 100) curAnim = run;
+		else if(Math.abs(velX) + Math.abs(velY) >= 50) curAnim = runHead;
 		else curAnim = walk;
 				
 		animTime += delta;

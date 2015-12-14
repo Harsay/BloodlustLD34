@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Sort;
 import com.harsay.ludumdare34.Blood;
 import com.harsay.ludumdare34.Collision;
 import com.harsay.ludumdare34.Gfx;
+import com.harsay.ludumdare34.Sfx;
 import com.harsay.ludumdare34.Tiles;
 import com.harsay.ludumdare34.entities.BodyPart;
 import com.harsay.ludumdare34.entities.Enemy;
@@ -113,6 +114,8 @@ public class Level {
 						
 						player.addFury();
 						
+						Sfx.randomHit().play(0.2f);
+						
 						// Guys from Vlambeer said that it works. idk
 						try {
 							Thread.sleep(10);
@@ -134,6 +137,8 @@ public class Level {
 				Entity ent1 = entities.get(i);
 				Entity ent2 = entities.get(j);
 				if(ent1.collides(ent2)) {
+					ent1.hadCollision = true;
+					ent2.hadCollision = true;
 					Collision.response(ent1, ent2);
 				}
 			}
@@ -147,6 +152,7 @@ public class Level {
 			for(int x=-1; x<2; x++) {
 				for(int y=-1; y<2; y++) {
 					if(ent.collides(this, (int)tilePos.x+x, (int)tilePos.y+y)) {
+						ent.hadCollision = true;
 						Collision.response(ent, (int)tilePos.x+x, (int)tilePos.y+y);
 					}
 				}

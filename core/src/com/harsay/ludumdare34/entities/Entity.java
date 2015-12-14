@@ -23,6 +23,8 @@ public class Entity {
 	public Vector2[] collisionPoints = new Vector2[4];
 	
 	public Array<Blood> bloods = new Array<Blood>();
+	
+	public boolean hadCollision = false;
 
 	
 	public static final int 

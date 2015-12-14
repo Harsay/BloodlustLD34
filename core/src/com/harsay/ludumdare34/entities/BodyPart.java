@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.harsay.ludumdare34.Blood;
 import com.harsay.ludumdare34.Gfx;
+import com.harsay.ludumdare34.Sfx;
 
 public class BodyPart extends Entity {
 	
@@ -34,7 +35,7 @@ public class BodyPart extends Entity {
 		
 		this.n = n;
 		
-		float spd = rand.nextFloat()*200;
+		float spd = rand.nextFloat()*50;
 		if(faces == Entity.UP || faces == Entity.DOWN) {
 			velX = spd*n;
 		}
@@ -80,6 +81,7 @@ public class BodyPart extends Entity {
 				z -= 100*delta;
 				if(z <= 0) {
 					bounces--;
+					Sfx.randomSplat().play(0.1f);
 					if(bounces > 0)  {
 						goesUp = true;
 						sprite.rotate(90);
