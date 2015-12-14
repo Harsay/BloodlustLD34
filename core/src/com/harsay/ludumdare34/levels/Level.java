@@ -56,7 +56,7 @@ public class Level {
 	}
 	
 	public void loadNextLevel() {
-		lvl++;
+		lvl++ ;
 		
 		entities.clear();
 		
@@ -232,9 +232,7 @@ public class Level {
 		
 		int y = tilesHeight - (int) Math.floor(width/tilesWidth) - 1;
 		int x = (width%tilesWidth);
-				
-		System.out.println(x + " | " + y);
-		
+						
 		return new Vector2(x, y);
 	}
 	

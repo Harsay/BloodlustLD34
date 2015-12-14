@@ -14,7 +14,7 @@ public class WelcomeScreen extends GameScreen {
 	public WelcomeScreen(Game game) {
 		super(game);
 		l = new GlyphLayout(Gfx.font, "BLOODLUST");
-		k = new GlyphLayout(Gfx.font, "Castle Of Cowards");
+		k = new GlyphLayout(Gfx.font, "Dungeon Of Cowards");
 		s = new GlyphLayout(Gfx.font, "Press ENTER to play.");
 	}
 	

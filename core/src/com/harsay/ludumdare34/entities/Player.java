@@ -55,9 +55,10 @@ public class Player extends Entity {
 		furyDecrementTime -= delta;
 		
 		if(furyDecrementTime <= 0)  {
-			 fury -= 1;
+			fury -= 1;
 			furyDecrementTime = 0.2f;
 		}
+		
 		
 		velX = 0;
 		velY = 0;
@@ -115,7 +116,7 @@ public class Player extends Entity {
 			else currentTexture = run.getKeyFrame(animTime, true);
 		}
 		
-		//System.out.println(fury);
+		System.out.println("Fury " + fury);
 
 	}
 	
@@ -138,8 +139,8 @@ public class Player extends Entity {
 	}
 	
 	public void addFury() {
-		fury += 2;
-		furyDecrementTime += 0.2f;
+		fury += 4;
+		//furyDecrementTime += 0.1f;
 		if(fury > 100) fury = 100;
 	}
 }
