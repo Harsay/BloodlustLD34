@@ -21,7 +21,6 @@ public class Gfx {
 	public static Array<TextureRegion> frames = new Array<TextureRegion>();
 
 	public static void load() {
-		// FUCK THIS
 		// JUST REMEMBER
 		// FONT HAS TOP LEFT CORNER COORDINATES!!!
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Minecraft.ttf"));
